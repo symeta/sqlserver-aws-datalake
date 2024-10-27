@@ -2,8 +2,7 @@
 
 ## Architectural Diagram
 
-<img width="845" alt="image" src="https://github.com/user-attachments/assets/2a4f9638-f3c8-4efa-8389-ac31f10fd500">
-
+<img width="845" alt="image" src="https://github.com/user-attachments/assets/5329d095-ea86-47e8-bb14-c707b6fab573">
 
 ## Implementation Guidance
 - [1.Export MS SQL Server database to Amazon S3 via AWS DMS](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/export-a-microsoft-sql-server-database-to-amazon-s3-by-using-aws-dms.html)
