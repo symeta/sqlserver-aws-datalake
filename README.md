@@ -2,9 +2,14 @@
 
 ## Architectural Diagram
 
-<img width="845" alt="image" src="https://github.com/user-attachments/assets/5329d095-ea86-47e8-bb14-c707b6fab573">
+<img width="931" alt="image" src="https://github.com/user-attachments/assets/bc7c2e98-475f-4298-9190-c895952c8899">
+
 
 ## Implementation Guidance
+
+### Option1: DMS (Full Load + CDC) + Redshift Serverless + Quick 
+
+
 - [1.Export MS SQL Server database to Amazon S3 via AWS DMS](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/export-a-microsoft-sql-server-database-to-amazon-s3-by-using-aws-dms.html)
 - [2.Migrating Data to Delta Lake via AWS DMS](https://www.databricks.com/blog/2019/07/15/migrating-transactional-data-to-a-delta-lake-using-aws-dms.html)
 - [3.AWS DMS to migrate SQL Server to Amazon S3 bucket - Full Load + CDC](https://www.youtube.com/watch?v=Uk8uFUrDUp8)
