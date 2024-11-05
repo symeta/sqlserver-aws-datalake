@@ -51,9 +51,38 @@ GO
 - [create workgroup & namespace](https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-console-workgroups-create-workgroup-wizard.html)
 	- tips1: enable "manually enter the admin password" when creating namespace
 <img width="746" alt="Screenshot 2024-11-05 at 12 03 12" src="https://github.com/user-attachments/assets/d3a24b19-29ec-4350-bad7-3179e9cd0dee">
-	- tips2: make sure "dms-access-for-endpoint" role has been attached to namespace
+
+  	- tips2: make sure role "dms-access-for-endpoint" has been attached to namespace. [dms-access-for-endpoint role creation guidance](https://docs.aws.amazon.com/dms/latest/userguide/security-iam.html)
+
 <img width="1099" alt="Screenshot 2024-11-05 at 12 09 34" src="https://github.com/user-attachments/assets/7a95a84b-766e-40d1-9bbb-f6d47e63075a">
 
+trust policy configuration of role dms-access-for-endpoint
+```json
+
+ {
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "1",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "dms.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    },
+    {
+      "Sid": "2",
+      "Effect": "Allow",
+      "Principal": {
+        "Service": "redshift.amazonaws.com"
+      },
+      "Action": "sts:AssumeRole"
+    }
+  ]
+}
+                     
+                
+```
 
 #### 1.3 DMS preparation
 - [Replication Instance Creation](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Creating.html)
