@@ -57,7 +57,7 @@ GO
 
 <img width="1099" alt="Screenshot 2024-11-05 at 12 09 34" src="https://github.com/user-attachments/assets/7a95a84b-766e-40d1-9bbb-f6d47e63075a">
 
-- trust policy configuration of role dms-access-for-endpoint
+	- trust policy configuration of role dms-access-for-endpoint
 ```json
 
  {
@@ -80,9 +80,7 @@ GO
       "Action": "sts:AssumeRole"
     }
   ]
-}
-                     
-                
+}           
 ```
 
 #### 1.3 DMS preparation
