@@ -47,6 +47,22 @@ EXEC sys.sp_cdc_change_job @job_type = 'capture' ,@pollinginterval = 3599;
 GO
 ```
 
+#### 1.2 redshift serverless preparation
+- [create workgroup & namespace](https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-console-workgroups-create-workgroup-wizard.html)
+	- tips1: enable "manually enter the admin password"
+<img width="746" alt="Screenshot 2024-11-05 at 12 03 12" src="https://github.com/user-attachments/assets/d3a24b19-29ec-4350-bad7-3179e9cd0dee">
+ 
+
+#### 1.3 DMS preparation
+- [Replication Instance Creation](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Creating.html)
+
+<img width="1190" alt="Screenshot 2024-11-05 at 11 48 23" src="https://github.com/user-attachments/assets/a25a960d-b7ec-409b-88ef-83b0f556ac17">
+
+- [Source Endpoint Creation](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.SQLServer.html)
+
+<img width="1195" alt="Screenshot 2024-11-05 at 11 55 27" src="https://github.com/user-attachments/assets/3a3a4206-4cd4-4926-a403-5d524caff34a">
+
+- [Target Endpoint Creation]()
 
 
 - [1.Export MS SQL Server database to Amazon S3 via AWS DMS](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/export-a-microsoft-sql-server-database-to-amazon-s3-by-using-aws-dms.html)
