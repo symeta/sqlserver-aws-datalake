@@ -122,9 +122,19 @@ delete from db1 where persionid = 4
 
 <img width="672" alt="Screenshot 2024-11-05 at 12 36 12" src="https://github.com/user-attachments/assets/91a626bb-9391-48a8-a552-f1b41d333bd1">
 
+#### 1.7 quicksight activation & access to redshift serverless & amazon q in quicksight
+
+- [quicksight activation guidance](https://catalog.us-east-1.prod.workshops.aws/workshops/cd8ebba2-2ef8-431a-8f72-ca7f6761713d/en-US/q-workshop/0-prerequisites)
+
+- [quicksight access redshift serverless guidance](https://docs.aws.amazon.com/quicksight/latest/user/redshift-vpc-access.html)
+
+- [amazon q in quicksight](https://catalog.us-east-1.prod.workshops.aws/workshops/cd8ebba2-2ef8-431a-8f72-ca7f6761713d/en-US/q-workshop/6-generative-bi)
 
 
 
+
+
+## references
 - [1.Export MS SQL Server database to Amazon S3 via AWS DMS](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/export-a-microsoft-sql-server-database-to-amazon-s3-by-using-aws-dms.html)
 - [2.Migrating Data to Delta Lake via AWS DMS](https://www.databricks.com/blog/2019/07/15/migrating-transactional-data-to-a-delta-lake-using-aws-dms.html)
 - [3.AWS DMS to migrate SQL Server to Amazon S3 bucket - Full Load + CDC](https://www.youtube.com/watch?v=Uk8uFUrDUp8)
