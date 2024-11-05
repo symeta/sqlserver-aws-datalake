@@ -1,13 +1,20 @@
 # sqlserver-aws-datalake
 
-## Architectural Diagram
+## Objective
+- to achieve cost performant ODS layer on AWS
+- data source is sqlserver, hundreds of tables, each table with 10s level columns
+- should consider change data capture 
 
-<img width="931" alt="image" src="https://github.com/user-attachments/assets/bc7c2e98-475f-4298-9190-c895952c8899">
+## Solution Directions
+
+<img width="931" alt="image" src="https://github.com/user-attachments/assets/398bbb34-d3f4-46e4-93bd-a7da848c0a3e">
 
 
 ## Implementation Guidance
 
-### Option1: DMS (Full Load + CDC) + Redshift Serverless + Quick 
+### Direction1: DMS (Full Load + CDC) + Redshift Serverless + QuickSight
+
+
 
 
 - [1.Export MS SQL Server database to Amazon S3 via AWS DMS](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/export-a-microsoft-sql-server-database-to-amazon-s3-by-using-aws-dms.html)
