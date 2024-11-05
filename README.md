@@ -12,6 +12,8 @@
 
 ## Implementation Guidance
 
+### [FiveTran at AWS Marketpkace](https://aws.amazon.com/marketplace/seller-profile?id=acb7eb70-22cb-47b7-912d-95842411f4ee)
+
 ### Direction1: DMS (Full Load + CDC) + Redshift Serverless + QuickSight
 
 #### 1.1 sqlserver preparation
