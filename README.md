@@ -107,7 +107,7 @@ GO
 
 <img width="1197" alt="Screenshot 2024-11-05 at 12 30 05" src="https://github.com/user-attachments/assets/17497fed-b87b-4667-9de9-4d014cbbb0e9">
 
-#### 1.5 CDC DML sql
+#### 1.5 CDC DML sql run on sqlserver
 ```sql
 insert into db1 values (4, 'Adam');
 update db1 set personname = 'Josh' where persionid = 1;
