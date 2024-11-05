@@ -50,14 +50,14 @@ GO
 #### 1.2 redshift serverless preparation
 - [create workgroup & namespace](https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-console-workgroups-create-workgroup-wizard.html)
 
-	- tips1: enable "manually enter the admin password" when creating namespace
+- tips1: enable "manually enter the admin password" when creating namespace
 <img width="746" alt="Screenshot 2024-11-05 at 12 03 12" src="https://github.com/user-attachments/assets/d3a24b19-29ec-4350-bad7-3179e9cd0dee">
 
 - tips2: make sure role "dms-access-for-endpoint" has been attached to namespace. [dms-access-for-endpoint role creation guidance](https://docs.aws.amazon.com/dms/latest/userguide/security-iam.html)
 
 <img width="1099" alt="Screenshot 2024-11-05 at 12 09 34" src="https://github.com/user-attachments/assets/7a95a84b-766e-40d1-9bbb-f6d47e63075a">
 
-	- trust policy configuration of role dms-access-for-endpoint
+- trust policy configuration of role dms-access-for-endpoint
 ```json
 
  {
@@ -82,6 +82,10 @@ GO
   ]
 }           
 ```
+- redshift serverless connection info
+
+<img width="1084" alt="Screenshot 2024-11-05 at 12 22 03" src="https://github.com/user-attachments/assets/6221bc65-9fdf-48a1-8980-7f6b0f225640">
+
 
 #### 1.3 DMS preparation
 - [Replication Instance Creation](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_ReplicationInstance.Creating.html)
@@ -92,7 +96,33 @@ GO
 
 <img width="1195" alt="Screenshot 2024-11-05 at 11 55 27" src="https://github.com/user-attachments/assets/3a3a4206-4cd4-4926-a403-5d524caff34a">
 
-- [Target Endpoint Creation]()
+- [Target Endpoint Creation](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.Redshift.html)
+
+<img width="1198" alt="Screenshot 2024-11-05 at 12 26 02" src="https://github.com/user-attachments/assets/78a2cd07-3882-4a88-a628-f0f5b4834438">
+
+
+#### 1.4 DMS task creation
+
+- [DMS migration task creation](https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.Creating.html)
+
+<img width="1197" alt="Screenshot 2024-11-05 at 12 30 05" src="https://github.com/user-attachments/assets/17497fed-b87b-4667-9de9-4d014cbbb0e9">
+
+#### 1.5 CDC DML sql
+```sql
+insert into db1 values (4, 'Adam');
+update db1 set personname = 'Josh' where persionid = 1;
+delete from db1 where persionid = 2
+
+insert into db1 values (5, 'Lily');
+update db1 set personname = 'name changed' where persionid = 1;
+delete from db1 where persionid = 4
+```
+
+#### 1.6 redshift serverless query table show case
+
+<img width="672" alt="Screenshot 2024-11-05 at 12 36 12" src="https://github.com/user-attachments/assets/91a626bb-9391-48a8-a552-f1b41d333bd1">
+
+
 
 
 - [1.Export MS SQL Server database to Amazon S3 via AWS DMS](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/export-a-microsoft-sql-server-database-to-amazon-s3-by-using-aws-dms.html)
