@@ -14,6 +14,38 @@
 
 ### Direction1: DMS (Full Load + CDC) + Redshift Serverless + QuickSight
 
+#### 1.1 sqlserver preparation
+- database, table DDL
+
+```sql
+create database testdb;
+use testdb;
+
+create table db1 (
+	persionid int,
+	personname varchar(225)
+	);
+```
+- table DML
+
+```sql
+insert into db1 values (1, 'John');
+insert into db1 values (2, 'Mary');
+insert into db1 values (3, 'Dick');
+```
+
+- enable sqlserver CDC
+
+```sh
+EXEC msdb.dbo.rds_cdc_enable_db 'testdb';
+GO
+
+EXECUTE sys.sp_cdc_enable_table @source_schema = N'dbo', @source_name =N'db1', @role_name = NULL;
+GO
+
+EXEC sys.sp_cdc_change_job @job_type = 'capture' ,@pollinginterval = 3599;
+GO
+```
 
 
 
