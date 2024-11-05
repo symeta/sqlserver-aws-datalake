@@ -7,7 +7,7 @@
 
 ## Solution Directions
 
-<img width="931" alt="image" src="https://github.com/user-attachments/assets/398bbb34-d3f4-46e4-93bd-a7da848c0a3e">
+<img width="931" alt="image" src="https://github.com/user-attachments/assets/122ab09e-c6d7-43dd-8696-943c6f48f0d5">
 
 
 ## Implementation Guidance
@@ -131,8 +131,110 @@ delete from db1 where persionid = 4
 - [amazon q in quicksight](https://catalog.us-east-1.prod.workshops.aws/workshops/cd8ebba2-2ef8-431a-8f72-ca7f6761713d/en-US/q-workshop/6-generative-bi)
 
 
+### Direction2: DMS (Full Load + CDC) + s3(full,cdc) + delta lake + databricks + quicksight
+
+- [Migrating Data to Delta Lake via AWS DMS](https://www.databricks.com/blog/2019/07/15/migrating-transactional-data-to-a-delta-lake-using-aws-dms.html)
+
+- [Databricks @ AWS MarketPlace](https://aws.amazon.com/marketplace/pp/prodview-wtyi5lgtce6n6?applicationId=AWS-Marketplace-Console&ref_=beagle&sr=0-1)
+
+- [quicksight access databricks](https://docs.aws.amazon.com/quicksight/latest/user/quicksight-databricks.html)
 
 
+### Direction3: DMS (Full Load + CDC) + s3(full,cdc) + iceberg + emr serverless + athena + quicksight
+
+- [implementation guidance blog](https://aws.amazon.com/blogs/big-data/implement-a-cdc-based-upsert-in-a-data-lake-using-apache-iceberg-and-aws-glue/)
+
+- sample spark code
+```scala
+package icebergdemo
+import org.apache.spark.sql.SparkSession
+/***
+* Spark
+与 Icberg DDL
+操作
+*/
+object SparkIcebergMergeInto {
+def main(args: Array[String]): Unit = {
+//
+创建 Spark Catalog
+val spark =
+SparkSession.builder().appName("SParkOperateIceberg")
+//
+设置 glue catalog
+.config("spark.sql.catalog.glue_prod",
+"org.apache.iceberg.spark.SparkCatalog")
+.config("spark.sql.catalog.glue_prod.warehouse", "s3://tang-
+iceberg-tokyo/spark-iceberg-glue/")
+.config("spark.sql.catalog.glue_prod.catalog-impl",
+"org.apache.iceberg.aws.glue.GlueCatalog")
+.config("spark.sql.catalog.glue_prod.io-impl",
+"org.apache.iceberg.aws.s3.S3FileIO")
+.config("spark.sql.catalog.glue_prod.lock-impl",
+"org.apache.iceberg.aws.glue.DynamoLockManager")
+.config("spark.sql.catalog.glue_prod.lock.table",
+"myGlueLockTable")
+.config("spark.sql.extensions",
+"org.apache.iceberg.spark.extensions.IcebergSparkSessionExtensions"
+)
+.getOrCreate()
+/***
+* Iceberg MERGE INTO
+语法
+*/
+spark.sql(
+"""
+| create table glue_prod.iceberg.a (id int, name string, age
+int) using iceberg
+|""".stripMargin)
+spark.sql(
+"""
+| create table glue_prod.iceberg.b (id int, name string, age
+int, tp string) using iceberg
+|""".stripMargin)
+spark.sql(
+"""
+| insert into glue_prod.iceberg.a values (1, "zs", 18), (2,
+"ls", 19), (3, "ww", 20)
+|""".stripMargin)
+spark.sql(
+"""
+| insert into glue_prod.iceberg.b values (1, "zs", 30,
+"delete"), (2, "李四", 20, "update"), (4, "王五", 32, "add")
+|""".stripMargin)
+// merge into
+表 a
+spark.sql(
+"""
+| merge into glue_prod.iceberg.a t1
+| using (select id, name, age, tp from glue_prod.iceberg.b)
+t2
+| on t1.id = t2.id
+| when matched and t2.tp = 'delete' then delete
+| when matched and t2.tp = 'update' then update set
+t1.name=t2.name, t1.age=t2.age
+| when not matched then insert (id, name, age) values
+(t2.id, t2.name, t2.age)
+|""".stripMargin).show()
+/***
+*
+结果为：
++---+----+---+
+| id|name|age|
++---+----+---+
+| 4|
+王五| 32|
+| 2|
+李四| 20|
+| 3| ww| 20|
++---+----+---+
+*/
+spark.sql(
+"""
+| select * from glue_prod.iceberg.a
+|""".stripMargin).show()
+}
+}
+```
 
 ## references
 - [1.Export MS SQL Server database to Amazon S3 via AWS DMS](https://docs.aws.amazon.com/prescriptive-guidance/latest/patterns/export-a-microsoft-sql-server-database-to-amazon-s3-by-using-aws-dms.html)
